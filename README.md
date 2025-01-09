@@ -66,72 +66,77 @@
 
 ```bash
 pip install openai numpy pandas faiss-cpu fastapi uvicorn
+```
+
+## Setup & Usage
+## Clone the repository:
 
 
-Setup & Usage
-Clone the repository:
+```bash 
 
-bash
-Copy code
-git clone 
+git clone ... 
 cd recommendation-system
+```
 Install dependencies (e.g., via pip):
 
-bash
-Copy code
+```bash 
 pip install -r requirements.txt
+```
 or manually install the listed packages.
 
-Set OpenAI API Key (if using OpenAI):
+## Set OpenAI API Key (if using OpenAI):
 
-bash
-Copy code
+```bash 
 export OPENAI_API_KEY="YOUR_OPENAI_API_KEY"
+```
 Or hard-code it in the code (not recommended for production).
 
-Run Step 1 (Data Generation):
+## Run Step 1 (Data Generation):
 
-bash
-Copy code
+```bash 
 python step1_data_pipeline.py
+```
 This creates mock_data/users.csv, mock_data/videos.csv, mock_data/interactions.csv.
-Run Step 2 (Basic Embeddings) [Optional check]:
+## Run Step 2 (Basic Embeddings) [Optional check]:
 
-bash
-Copy code
+```bash 
 python step2_embeddings.py
+```
+
 Loads videos.csv, embeds, and does a naive similarity search.
-Run Step 3 (Faiss Index) [Optional check]:
+## Run Step 3 (Faiss Index) [Optional check]:
 
-bash
-Copy code
+```bash 
 python step3_faiss.py
+```
+
 Builds a Faiss index for the video embeddings and does a test query.
-Run Step 4 (Re-Ranking) [Optional check]:
+## Run Step 4 (Re-Ranking) [Optional check]:
 
-bash
-Copy code
+```bash 
 python step4_rerank.py
+```
 Merges popularity info from interactions, retrieves top candidates from Faiss, and re-ranks them.
-Run Step 5 (API Serving):
+## Run Step 5 (API Serving):
 
-bash
-Copy code
+```bash 
 uvicorn step5_api:app --host 0.0.0.0 --port 8000 --reload
+```
+
 Go to http://localhost:8000/docs to see the auto-generated FastAPI docs.
 Try POST /recommend.
-Run Step 6 (Incremental Updates):
+## Run Step 6 (Incremental Updates):
 
-bash
-Copy code
+```bash 
 uvicorn step6_incremental:app --host 0.0.0.0 --port 8000 --reload
+```
 Endpoints:
 POST /recommend: get recommendations in real time
 POST /log_interaction: increment popularity/watch counts
 POST /add_video: add a new video & embed it
 (Optional) Explore Step 7 for advanced production strategies:
 
-Monitoring & Observability
+## Monitoring & Observability
 A/B Testing
 User-based personalization
 Large-scale deployment (Kubernetes, cloud-based vector DB, etc.)
