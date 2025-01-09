@@ -1,29 +1,9 @@
-
-┌───────────────────────────┐       ┌─────────────────────────────┐
-│  Data Generation (Step 1) │       │   Mock Data (CSV files)     │
-└────────────┬──────────────┘       └───────────────┬─────────────┘
-             │                                      │
-             v                                      v
-┌───────────────────────────┐       ┌─────────────────────────────┐
-│ Embedding-based Retrieval │       │   Faiss Index (Step 3)      │
-│  (Steps 2 & 3)            │       │  + Re-ranking (Step 4)      │
-└────────────┬──────────────┘       └───────────────┬─────────────┘
-             │                                      │
-             v                                      v
-┌───────────────────────────┐       ┌─────────────────────────────┐
-│     FastAPI Serving       │       │  Incremental Updates        │
-│    (Steps 5 & 6)          │       │    (Logging, new items)     │
-└────────────┬──────────────┘       └───────────────┬─────────────┘
-             │                                      │
-             └───────────────────────────────────────┘
-
 1. **Data** is generated (mocked) and stored locally in CSV files.  
 2. We create embeddings for each video and store them in **Faiss** for fast similarity search.  
 3. **Real-time** user queries go through a **FastAPI** endpoint, which retrieves top candidates from Faiss, then **re-ranks** them using popularity or other metadata.  
 4. We provide endpoints to **log user interactions** and **add new videos** incrementally.  
 
----
-
+┌───────────────────────────┐ ┌─────────────────────────────┐ │ Data Generation (Step 1) │ │ Mock Data (CSV files) │ └────────────┬──────────────┘ └───────────────┬─────────────┘ │ │ v v ┌───────────────────────────┐ ┌─────────────────────────────┐ │ Embedding-based Retrieval │ │ Faiss Index (Step 3) │ │ (Steps 2 & 3) │ │ + Re-ranking (Step 4) │ └────────────┬──────────────┘ └───────────────┬─────────────┘ │ │ v v ┌───────────────────────────┐ ┌─────────────────────────────┐ │ FastAPI Serving │ │ Incremental Updates │ │ (Steps 5 & 6) │ │ (Logging, new items) │ └────────────┬──────────────┘ └───────────────┬─────────────┘ │ │ └───────────────────────────────────────┘
 ## Steps
 
 **Step 1**: Mock Data Generation  
