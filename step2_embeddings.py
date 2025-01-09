@@ -12,7 +12,7 @@ import openai
 ##########################
 # Configurable constants #
 ##########################
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "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")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "your open ai open key")
 EMBEDDING_MODEL = "text-embedding-ada-002"  # For OpenAI
 
 # If using Sentence Transformers locally:
