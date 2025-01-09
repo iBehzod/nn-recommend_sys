@@ -3,7 +3,8 @@
 3. **Real-time** user queries go through a **FastAPI** endpoint, which retrieves top candidates from Faiss, then **re-ranks** them using popularity or other metadata.  
 4. We provide endpoints to **log user interactions** and **add new videos** incrementally.  
 
-┌───────────────────────────┐ ┌─────────────────────────────┐ │ Data Generation (Step 1) │ │ Mock Data (CSV files) │ └────────────┬──────────────┘ └───────────────┬─────────────┘ │ │ v v ┌───────────────────────────┐ ┌─────────────────────────────┐ │ Embedding-based Retrieval │ │ Faiss Index (Step 3) │ │ (Steps 2 & 3) │ │ + Re-ranking (Step 4) │ └────────────┬──────────────┘ └───────────────┬─────────────┘ │ │ v v ┌───────────────────────────┐ ┌─────────────────────────────┐ │ FastAPI Serving │ │ Incremental Updates │ │ (Steps 5 & 6) │ │ (Logging, new items) │ └────────────┬──────────────┘ └───────────────┬─────────────┘ │ │ └───────────────────────────────────────┘
+![alt text](image.png)
+
 ## Steps
 
 **Step 1**: Mock Data Generation  
